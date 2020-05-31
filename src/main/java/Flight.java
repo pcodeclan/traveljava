@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class Flight {
 
+    private Passenger passenger;
     private ArrayList<Passenger> passengers;
     private Plane plane;
     private String flightNum;
@@ -19,9 +20,34 @@ public class Flight {
         this.departureTime = departureTime;
         this.planeSeats = plane.getCapacity();
     }
+    public double getPlaneWeight(){
+        return this.plane.getTotalWeight();
+    }
+
+    public double getPlaneCapacity() {
+        return this.plane.getCapacity();
+    }
 
     public int getPlaneSeats(){
         return this.planeSeats;
+    }
+
+    //Get all elements inside arraylist and extract numofbags property
+    public int getAllPassengerNumOfBags(){
+        int totalBags = 0;
+        for (Passenger passenger : passengers){
+            totalBags = totalBags + passenger.getNumOfBags();
+        }
+        return totalBags;
+    }
+
+    //Check if there are seats remaining
+    //If YES then add passenger to passenger array
+    public void bookPassenger(Passenger passenger){
+        if (this.passengers.size() < getPlaneSeats()) {
+            this.passengers.add(passenger);
+            this.planeSeats --;
+        }
     }
 
 
